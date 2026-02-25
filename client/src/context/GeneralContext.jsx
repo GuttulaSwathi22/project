@@ -18,10 +18,12 @@ const GeneralContextProvider = ({children}) => {
 
   const navigate = useNavigate();
 
+  const API_BASE = 'http://127.0.0.1:4000';
+
   const login = async () =>{
     try{
       const loginInputs = {email, password}
-        await axios.post('http://localhost:6001/login', loginInputs)
+        await axios.post(`${API_BASE}/login`, loginInputs)
         .then( async (res)=>{
 
             localStorage.setItem('userId', res.data._id);
@@ -48,7 +50,7 @@ const GeneralContextProvider = ({children}) => {
   
   const register = async () =>{
     try{
-        await axios.post('http://localhost:6001/register', inputs)
+        await axios.post(`${API_BASE}/register`, inputs)
         .then( async (res)=>{
             localStorage.setItem('userId', res.data._id);
             localStorage.setItem('userType', res.data.usertype);

@@ -4,15 +4,15 @@ import React, { useEffect, useState } from 'react'
 const AllBookings = () => {
 
   const [bookings, setBookings] = useState([]);
+  const API_BASE = 'http://127.0.0.1:4000';
 
-  const userId = localStorage.getItem('userId');
 
   useEffect(()=>{
     fetchBookings();
   }, [])
 
   const fetchBookings = async () =>{
-    await axios.get('http://localhost:6001/fetch-bookings').then(
+    await axios.get(`${API_BASE}/fetch-bookings`).then(
       (response)=>{
         setBookings(response.data.reverse());
       }
@@ -20,7 +20,7 @@ const AllBookings = () => {
   }
 
   const cancelTicket = async (id) =>{
-    await axios.put(`http://localhost:6001/cancel-ticket/${id}`).then(
+    await axios.put(`${API_BASE}/cancel-ticket/${id}`).then(
       (response)=>{
         alert("Ticket cancelled!!");
         fetchBookings();

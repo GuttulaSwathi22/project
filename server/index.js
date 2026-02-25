@@ -4,6 +4,9 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import bcrypt from 'bcrypt';
 import { User, Booking, Flight } from './schemas.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 
@@ -14,8 +17,10 @@ app.use(cors());
 
 // mongoose setup
 
-const PORT = 6001;
-mongoose.connect('mongodb://localhost:27017/FlightBookingMERN', { 
+const PORT = Number(process.env.PORT) || 6001;
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/FlightBookingMERN';
+
+mongoose.connect(MONGO_URI, { 
         useNewUrlParser: true,
         useUnifiedTopology: true,
     }

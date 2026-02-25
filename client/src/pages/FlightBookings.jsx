@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 const FlightBookings = () => {
   const [userDetails, setUserDetails] = useState();
+  const API_BASE = 'http://127.0.0.1:4000';
 
   useEffect(()=>{
     fetchUserData(); 
@@ -11,7 +12,7 @@ const FlightBookings = () => {
   const fetchUserData = async () =>{
     try{
       const id = localStorage.getItem('userId');
-      await axios.get(`http://localhost:6001/fetch-user/${id}`).then(
+      await axios.get(`${API_BASE}/fetch-user/${id}`).then(
         (response)=>{
           setUserDetails(response.data);
           console.log(response.data);
@@ -32,7 +33,7 @@ const FlightBookings = () => {
   }, [])
 
   const fetchBookings = async () =>{
-    await axios.get('http://localhost:6001/fetch-bookings').then(
+    await axios.get(`${API_BASE}/fetch-bookings`).then(
       (response)=>{
         setBookings(response.data.reverse());
       }
@@ -40,7 +41,7 @@ const FlightBookings = () => {
   }
 
   const cancelTicket = async (id) =>{
-    await axios.put(`http://localhost:6001/cancel-ticket/${id}`).then(
+    await axios.put(`${API_BASE}/cancel-ticket/${id}`).then(
       (response)=>{
         alert("Ticket cancelled!!");
         fetchBookings();

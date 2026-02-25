@@ -6,6 +6,7 @@ const NewFlight = () => {
 
 
     const [userDetails, setUserDetails] = useState();
+    const API_BASE = 'http://127.0.0.1:4000';
 
     useEffect(()=>{
       fetchUserData();
@@ -14,7 +15,7 @@ const NewFlight = () => {
     const fetchUserData = async () =>{
       try{
         const id = localStorage.getItem('userId');
-        await axios.get(`http://localhost:6001/fetch-user/${id}`).then(
+        await axios.get(`${API_BASE}/fetch-user/${id}`).then(
           (response)=>{
             setUserDetails(response.data);
             console.log(response.data);
@@ -43,7 +44,7 @@ const NewFlight = () => {
       const inputs = {flightName, flightId, origin, destination, 
                         departureTime: startTime, arrivalTime, basePrice, totalSeats};
   
-      await axios.post('http://localhost:6001/add-Flight', inputs).then(
+      await axios.post(`${API_BASE}/add-flight`, inputs).then(
         async (response)=>{
           alert('Flight added successfully!!');
           setFlightName('');

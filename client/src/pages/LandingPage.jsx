@@ -25,9 +25,10 @@ const LandingPage = () => {
     } else if(localStorage.getItem('userType') === 'flight-operator'){
       navigate('/flight-admin');
     }
-  }, []);
+  }, [navigate]);
 
   const [Flights, setFlights] = useState([]);
+  const API_BASE = 'http://127.0.0.1:4000';
 
   const fetchFlights = async () =>{
 
@@ -38,7 +39,7 @@ const LandingPage = () => {
         const date2 = new Date(returnDate);
         if(date1 > date && date2 > date1){
           setError("");
-          await axios.get('http://localhost:6001/fetch-flights').then(
+          await axios.get(`${API_BASE}/fetch-flights`).then(
               (response)=>{
                 setFlights(response.data);
                 console.log(response.data)
@@ -52,7 +53,7 @@ const LandingPage = () => {
         const date1 = new Date(departureDate);
         if(date1 >= date){
           setError("");
-          await axios.get('http://localhost:6001/fetch-flights').then(
+          await axios.get(`${API_BASE}/fetch-flights`).then(
               (response)=>{
                 setFlights(response.data);
                 console.log(response.data)

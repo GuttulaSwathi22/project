@@ -6,13 +6,14 @@ import axios from 'axios';
 const AllUsers = () => {
 
   const [users, setUsers] = useState([]);
+  const API_BASE = 'http://127.0.0.1:4000';
 
   useEffect(()=>{
     fetchUsers();
   },[]);
 
   const fetchUsers = async () =>{
-    await axios.get('http://localhost:6001/fetch-users').then(
+    await axios.get(`${API_BASE}/fetch-users`).then(
       (response) =>{
         setUsers(response.data);
       }

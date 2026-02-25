@@ -10,6 +10,7 @@ const FlightAdmin = () => {
   const [userDetails, setUserDetails] = useState();
   const [bookingCount, setbookingCount] = useState(0);
   const [flightsCount, setFlightsCount] = useState(0);
+  const API_BASE = 'http://127.0.0.1:4000';
 
   useEffect(()=>{
     fetchUserData();
@@ -18,7 +19,7 @@ const FlightAdmin = () => {
   const fetchUserData = async () =>{
     try{
       const id = localStorage.getItem('userId');
-      await axios.get(`http://localhost:6001/fetch-user/${id}`).then(
+      await axios.get(`${API_BASE}/fetch-user/${id}`).then(
         (response)=>{
           setUserDetails(response.data);
           console.log(response.data);
@@ -37,12 +38,12 @@ const FlightAdmin = () => {
   }, [])
 
   const fetchData = async () =>{
-    await axios.get('http://localhost:6001/fetch-bookings').then(
+    await axios.get(`${API_BASE}/fetch-bookings`).then(
       (response)=>{
         setbookingCount(response.data.filter(booking => booking.flightName === localStorage.getItem('username')).length);
       }
     );
-    await axios.get('http://localhost:6001/fetch-flights').then(
+    await axios.get(`${API_BASE}/fetch-flights`).then(
       (response)=>{
         setFlightsCount(response.data.filter(booking => booking.flightName === localStorage.getItem('username')).length);
       }

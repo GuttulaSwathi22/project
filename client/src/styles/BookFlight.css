@@ -1,56 +1,100 @@
 .BookFlightPage{
     width: 100%;
-    height: fit-content;
+    min-height: 100vh;
     padding-top: 15vh;
     padding-bottom: 5vh;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
+    background: radial-gradient(circle at top left, #e0f3ff 0, #f5f7fb 35%, #e6e0ff 100%);
 }
 
 .BookingFlightPageContainer{
-    width: 44%;
-    background-color: rgba(242, 245, 247, 0.753);
-    padding: 2vh 2%;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    border-radius: 0.7rem;
+    width: 48%;
+    max-width: 720px;
+    background: #ffffff;
+    padding: 2.5rem 2.75rem;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+    border-radius: 1.1rem;
+    border: 1px solid rgba(148, 163, 184, 0.25);
 }
+
 .BookingFlightPageContainer h2{
-    margin: 0;
-    margin-bottom: 5vh;
+    margin: 0 0 1rem 0;
     text-align: center;
-    color: rgb(54, 104, 120);
+    color: #0f172a;
+    font-weight: 700;
+    letter-spacing: 0.02em;
 }
+
+.BookingFlightPageContainer h2 + span{
+    margin-bottom: 1rem;
+}
+
 .BookingFlightPageContainer p{
-    margin: 0;
-    margin-bottom: 5px;
-    color: rgb(54, 104, 120);
+    margin: 0 0 4px 0;
+    color: #1e293b;
+    font-size: 0.92rem;
 }
+
 .BookingFlightPageContainer p b{
     font-weight: 600;
 }
+
 .BookingFlightPageContainer span{
     display: grid;
     grid-template-columns: 64% 33%;
     gap: 3%;
+    margin-bottom: 0.9rem;
 }
+
 .BookingFlightPageContainer .span3{
     display: grid;
-    grid-template-columns: 31.3% 31.3% 31.3%;
-    gap: 3%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.5rem;
 }
+
+.BookingFlightPageContainer .form-floating > .form-control,
+.BookingFlightPageContainer .form-floating > .form-select{
+    border-radius: 0.75rem;
+}
+
+.BookingFlightPageContainer .form-floating > label{
+    color: #64748b;
+}
+
 .BookingFlightPageContainer button{
-    width: 30%;
-    margin-left: 35%;
-    margin-top: 25px;
+    width: 40%;
+    max-width: 220px;
+    margin: 1.75rem auto 0;
+    display: block;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    box-shadow: 0 12px 25px rgba(37, 99, 235, 0.35);
 }
+
+.BookingFlightPageContainer button:hover{
+    box-shadow: 0 16px 30px rgba(37, 99, 235, 0.45);
+}
+
 .BookingFlightPageContainer li{
     font-size: 0.8rem;
 }
 
+.new-passenger{
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    background: #f8fafc;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    margin-top: 0.75rem;
+}
+
 .new-passenger h4{
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
-    color: rgb(48, 91, 114);
+    color: #0f172a;
 }
 
 .new-passenger-inputs{
@@ -58,6 +102,30 @@
     grid-template-columns: 67% 30%;
     gap: 3%;
 }
+
 .new-passenger-inputs select{
     padding-left: 12px;
+}
+
+@media (max-width: 900px){
+    .BookingFlightPageContainer{
+        width: 92%;
+        padding: 2rem 1.5rem;
+    }
+
+    .BookingFlightPageContainer span{
+        grid-template-columns: 1fr;
+    }
+
+    .BookingFlightPageContainer .span3{
+        grid-template-columns: 1fr;
+    }
+
+    .new-passenger-inputs{
+        grid-template-columns: 1fr;
+    }
+
+    .BookingFlightPageContainer button{
+        width: 60%;
+    }
 }

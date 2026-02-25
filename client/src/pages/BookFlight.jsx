@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useCallback } from 'react'
 import '../styles/BookFlight.css'
 import { GeneralContext } from '../context/GeneralContext';
 import axios from 'axios';
@@ -13,14 +13,11 @@ const BookFlight = () => {
     const [StartCity, setStartCity] = useState('');
     const [destinationCity, setDestinationCity] = useState('');
     const [startTime, setStartTime] = useState();
+    const API_BASE = 'http://127.0.0.1:4000';
   
   
-    useEffect(()=>{
-      fetchFlightData();
-    }, [])
-  
-    const fetchFlightData = async () =>{
-      await axios.get(`http://localhost:6001/fetch-flight/${id}`).then(
+    const fetchFlightData = useCallback(async () =>{
+      await axios.get(`${API_BASE}/fetch-flight/${id}`).then(
         (response) =>{
           setFlightName(response.data.flightName);
           setFlightId(response.data.flightId);
@@ -30,7 +27,11 @@ const BookFlight = () => {
           setStartTime(response.data.departureTime);
         }
       )
-    }
+    }, [id])
+
+    useEffect(()=>{
+      fetchFlightData();
+    }, [fetchFlightData])
   
   
     const [email, setEmail] = useState('');
@@ -64,7 +65,7 @@ const BookFlight = () => {
       if(price[coachType] * basePrice * numberOfPassengers){
         setTotalPrice(price[coachType] * basePrice * numberOfPassengers);
       }
-    },[numberOfPassengers, coachType])
+    },[numberOfPassengers, coachType, basePrice])
   
   
     const navigate = useNavigate();
@@ -77,7 +78,7 @@ const BookFlight = () => {
                                                   email, mobile, passengers: passengerDetails, totalPrice, 
                                                   journeyDate, seatClass: coachType} 
       
-      await axios.post('http://localhost:6001/book-ticket', inputs).then(
+      await axios.post(`${API_BASE}/book-ticket`, inputs).then(
         (response)=>{
           alert("booking successful");
           navigate('/bookings');

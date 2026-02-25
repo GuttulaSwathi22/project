@@ -10,6 +10,7 @@ const Admin = () => {
   const [userCount, setUserCount] = useState(0);
   const [bookingCount, setbookingCount] = useState(0);
   const [flightsCount, setFlightsCount] = useState(0);
+  const API_BASE = 'http://127.0.0.1:4000';
 
 
   useEffect(()=>{
@@ -18,19 +19,19 @@ const Admin = () => {
   }, [])
 
   const fetchData = async () =>{
-    await axios.get('http://localhost:6001/fetch-users').then(
+    await axios.get(`${API_BASE}/fetch-users`).then(
       (response)=>{
         
         setUserCount(response.data.length -1);
         setUsers(response.data.filter(user => user.approval === 'not-approved'));
       }
     );
-    await axios.get('http://localhost:6001/fetch-bookings').then(
+    await axios.get(`${API_BASE}/fetch-bookings`).then(
       (response)=>{
         setbookingCount(response.data.length);
       }
     );
-    await axios.get('http://localhost:6001/fetch-flights').then(
+    await axios.get(`${API_BASE}/fetch-flights`).then(
       (response)=>{
         setFlightsCount(response.data.length);
       }
@@ -42,7 +43,7 @@ const Admin = () => {
   const approveRequest = async (id) =>{
       try{
 
-          await axios.post('http://localhost:6001/approve-operator', {id}).then(
+          await axios.post(`${API_BASE}/approve-operator`, {id}).then(
             (response)=>{
               alert("Operator approved!!");
               fetchData();
@@ -57,7 +58,7 @@ const Admin = () => {
   const rejectRequest = async (id) =>{
     try{
 
-      await axios.post('http://localhost:6001/reject-operator', {id}).then(
+      await axios.post(`${API_BASE}/reject-operator`, {id}).then(
         (response)=>{
           alert("Operator rejected!!");
           fetchData();
